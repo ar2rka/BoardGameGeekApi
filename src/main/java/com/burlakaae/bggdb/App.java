@@ -27,16 +27,18 @@ public class App
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","");
-        Connection conn = DriverManager.getConnection(url, props);
+        Connection conn = DriverManager.getConnection(url, props); 
+        //в таких случаях рекомендуется использовать try with resources
 
-        Statement st = conn.createStatement();
+        Statement st = conn.createStatement(); 
         ResultSet rs = st.executeQuery("SELECT * FROM bgg.boardgame");
         while (rs.next())
         {
             System.out.println(rs.getString("year_published"));
         }
-        rs.close();
-        st.close();
+        rs.close(); 
+        st.close(); //try with resources закроет rs и st автоматически
+        
         return 1;
     }
 }
