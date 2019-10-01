@@ -9,6 +9,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -49,7 +50,9 @@ public class bggApi {
          DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
          InputSource is = new InputSource(new StringReader(body));
          Document doc = dBuilder.parse(is);
-         Element rootel = doc.getDocumentElement();
-         return rootel.toString();
+         //Element rootel = doc.getDocumentElement();
+         NodeList nodeList = doc.getElementsByTagName("name");
+         Element el = (Element) nodeList.item(0);
+         return el.getAttribute("value").toString();
      }
 }
