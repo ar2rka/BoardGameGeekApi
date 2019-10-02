@@ -1,5 +1,7 @@
 package com.burlakaae.bggdb;
 
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -27,7 +29,12 @@ public class App
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","");
-        Connection conn = DriverManager.getConnection(url, props); 
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            Connection conn = DriverManager.getConnection(url, props);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Connection conn = DriverManager.getConnection(url, props);
         //в таких случаях рекомендуется использовать try with resources
 
         Statement st = conn.createStatement(); 
@@ -36,8 +43,7 @@ public class App
         {
             System.out.println(rs.getString("year_published"));
         }
-        rs.close(); 
-        st.close(); //try with resources закроет rs и st автоматически
+
         
         return 1;
     }

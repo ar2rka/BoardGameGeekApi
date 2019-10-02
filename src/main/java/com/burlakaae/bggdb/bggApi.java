@@ -53,6 +53,6 @@ public class bggApi {
          //Element rootel = doc.getDocumentElement();
          NodeList nodeList = doc.getElementsByTagName("name");
          Element el = (Element) nodeList.item(0);
-         return el.getAttribute("value").toString();
+         return el.getAttribute("value").toString() + el.getAttribute("type").toString();
      }
 }
