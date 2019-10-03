@@ -10,7 +10,7 @@ public class BoardGameDao {
 
     public class UserDao {
 
-        public BoardGame findById(int id) {
+        public BoardGame getName(int id) {
             return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(BoardGame.class, id);
         }
     }
