@@ -1,4 +1,4 @@
-package com.burlakaae.bggdb;
+package com.burlakaae.board_game_geek;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -9,10 +9,6 @@ import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.Properties;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args ) throws IOException, URISyntaxException, ParserConfigurationException, SAXException {

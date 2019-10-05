@@ -1,4 +1,4 @@
-package com.burlakaae.bggdb;
+package com.burlakaae.board_game_geek;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -52,7 +52,10 @@ public class bggApi {
          Document doc = dBuilder.parse(is);
          //Element rootel = doc.getDocumentElement();
          NodeList nodeList = doc.getElementsByTagName("name");
+
          Element el = (Element) nodeList.item(0);
+
          return el.getAttribute("value").toString() + el.getAttribute("type").toString();
      }
+
 }

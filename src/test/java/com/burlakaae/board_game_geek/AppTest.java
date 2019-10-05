@@ -1,4 +1,4 @@
-package com.burlakaae.bggdb;
+package com.burlakaae.board_game_geek;
 
 import static org.junit.Assert.assertTrue;
 

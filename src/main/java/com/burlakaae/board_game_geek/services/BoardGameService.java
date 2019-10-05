@@ -1,9 +1,7 @@
-package services;
+package com.burlakaae.board_game_geek.services;
 
-import dao.BoardGameDao;
-import dao.BoardGameDao;
-import models.BoardGame;
-import java.util.List;
+import com.burlakaae.board_game_geek.dao.BoardGameDao;
+import com.burlakaae.board_game_geek.models.BoardGame;
 
 public class BoardGameService {
 
