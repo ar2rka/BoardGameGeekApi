@@ -15,7 +15,7 @@ public class App
         //countQuery("q");
         bggApi bggApi = new bggApi();
         String body = bggApi.query(174430);
-        String answer = bggApi.xmlParser(body);
+        String answer = bggApi.xmlParser2(body).toString();
         System.out.println(answer);
 }
 

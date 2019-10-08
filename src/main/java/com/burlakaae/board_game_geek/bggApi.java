@@ -1,5 +1,12 @@
 package com.burlakaae.board_game_geek;
 
+import com.burlakaae.board_game_geek.models.BoardGame;
+import com.burlakaae.board_game_geek.models.Item;
+import com.burlakaae.board_game_geek.models.Items;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -20,6 +27,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 
 public class bggApi {
      public String query (Integer id) throws URISyntaxException {
@@ -46,16 +54,26 @@ public class bggApi {
          return body;
      }
 
-     public String xmlParser (String body) throws ParserConfigurationException, IOException, SAXException {
-         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-         InputSource is = new InputSource(new StringReader(body));
-         Document doc = dBuilder.parse(is);
-         //Element rootel = doc.getDocumentElement();
-         NodeList nodeList = doc.getElementsByTagName("name");
+//     public String xmlParser (String body) throws ParserConfigurationException, IOException, SAXException {
+//         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//         InputSource is = new InputSource(new StringReader(body));
+//         Document doc = dBuilder.parse(is);
+//         //Element rootel = doc.getDocumentElement();
+//         NodeList nodeList = doc.getElementsByTagName("name");
+//         BoardGame boardGame = new BoardGame();
+//         Element el = (Element) nodeList.item(0);
+//         boardGame.setThing_name(el.getAttribute("value").toString());
+//         boardGame.setThing_type(el.getAttribute("type").toString());
+//         // el.getAttribute("type").toString();
+//         return boardGame.toString();
+//     }
+    private static final String XML = "<items><item id=\"174430\"><thumbnail>https://cf.geekdo-images.com/</thumbnail></item></items>";
 
-         Element el = (Element) nodeList.item(0);
+     public Items xmlParser2(String body) throws JsonProcessingException {
+         ObjectMapper objectMapper = new XmlMapper();
 
-         return el.getAttribute("value").toString() + el.getAttribute("type").toString();
+         Items items = objectMapper.readValue(body, Items.class);
+         System.out.println(items);
+         return items;
      }
-
 }
