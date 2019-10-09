@@ -19,8 +19,6 @@ public final class Item {
     @Setter @Getter private String sortIndex;
     @JacksonXmlProperty(localName = "value", isAttribute = true)
     @Setter @Getter private String value;
-    @JacksonXmlProperty(localName = "description")
-    @Setter @Getter private String description;
     @JacksonXmlProperty(localName = "yearpublished")
     @Setter @Getter private String yearPublished;
     @JacksonXmlProperty(localName = "minplayers")

@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -54,26 +55,34 @@ public class bggApi {
          return body;
      }
 
-//     public String xmlParser (String body) throws ParserConfigurationException, IOException, SAXException {
-//         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-//         InputSource is = new InputSource(new StringReader(body));
-//         Document doc = dBuilder.parse(is);
-//         //Element rootel = doc.getDocumentElement();
-//         NodeList nodeList = doc.getElementsByTagName("name");
-//         BoardGame boardGame = new BoardGame();
-//         Element el = (Element) nodeList.item(0);
-//         boardGame.setThing_name(el.getAttribute("value").toString());
-//         boardGame.setThing_type(el.getAttribute("type").toString());
-//         // el.getAttribute("type").toString();
-//         return boardGame.toString();
-//     }
-    private static final String XML = "<items><item id=\"174430\"><thumbnail>https://cf.geekdo-images.com/</thumbnail></item></items>";
-
-     public Items xmlParser2(String body) throws JsonProcessingException {
-         ObjectMapper objectMapper = new XmlMapper();
-
-         Items items = objectMapper.readValue(body, Items.class);
-         System.out.println(items);
-         return items;
+     public String xmlParser (String body) throws ParserConfigurationException, IOException, SAXException {
+         BoardGame boardGame = new BoardGame();
+         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+         InputSource is = new InputSource(new StringReader(body));
+         Document doc = dBuilder.parse(is);
+         NodeList nodeList = doc.getElementsByTagName("item");
+         Element item = (Element) doc.getElementsByTagName("item").item(0);
+         Element name = (Element) doc.getElementsByTagName("name").item(0);
+         Element yearPublished = (Element) doc.getElementsByTagName("yearpublished").item(0);
+         Element minPlayers = (Element) doc.getElementsByTagName("minplayers").item(0);
+         Element maxPlayers = (Element) doc.getElementsByTagName("maxplayers").item(0);
+         boardGame.setThing_id(item.getAttribute("id"));
+         boardGame.setThing_type(item.getAttribute("type"));
+         boardGame.setThing_name(name.getAttribute("value"));
+         boardGame.setYear_published(yearPublished.getAttribute("value"));
+         boardGame.setMin_players(minPlayers.getAttribute("value"));
+         boardGame.setMax_players(maxPlayers.getAttribute("value"));
+         return boardGame.toString();
      }
+
+//    private static final String XML = "<items><item id=\"174430\"><thumbnail>https://cf.geekdo-images.com/</thumbnail></item></items>";
+//
+//     public Items xmlParser2(String body) throws JsonProcessingException {
+//         ObjectMapper objectMapper = new XmlMapper();
+//
+//         Items items = objectMapper.readValue(body, Items.class);
+//         System.out.println(items);
+//         return items;
+//     }
+
 }
