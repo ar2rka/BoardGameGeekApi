@@ -17,7 +17,7 @@ public class BoardGame {
 
     @Override
     public String toString() {
-        return String.format("Item {id %S, name %S, type %S, year published %S, min players %S, max players %S}",
-               thing_id, thing_name, thing_type, year_published, min_players, max_players);
+        return String.format("Item {id %S, name %S, type %S, year published %S, min players %S, max players %S, min age %S}",
+               thing_id, thing_name, thing_type, year_published, min_players, max_players, min_age);
     }
 }

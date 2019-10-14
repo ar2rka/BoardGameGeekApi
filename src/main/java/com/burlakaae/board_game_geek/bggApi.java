@@ -55,7 +55,7 @@ public class bggApi {
          return body;
      }
 
-     public String xmlParser (String body) throws ParserConfigurationException, IOException, SAXException {
+     public BoardGame xmlParser (String body) throws ParserConfigurationException, IOException, SAXException {
          BoardGame boardGame = new BoardGame();
          DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
          InputSource is = new InputSource(new StringReader(body));
@@ -66,13 +66,16 @@ public class bggApi {
          Element yearPublished = (Element) doc.getElementsByTagName("yearpublished").item(0);
          Element minPlayers = (Element) doc.getElementsByTagName("minplayers").item(0);
          Element maxPlayers = (Element) doc.getElementsByTagName("maxplayers").item(0);
+         Element playingTime = (Element) doc.getElementsByTagName("maxplayers").item(0);
+         Element minAge = (Element) doc.getElementsByTagName("minage").item(0);
          boardGame.setThing_id(item.getAttribute("id"));
          boardGame.setThing_type(item.getAttribute("type"));
          boardGame.setThing_name(name.getAttribute("value"));
          boardGame.setYear_published(yearPublished.getAttribute("value"));
          boardGame.setMin_players(minPlayers.getAttribute("value"));
          boardGame.setMax_players(maxPlayers.getAttribute("value"));
-         return boardGame.toString();
+         boardGame.setMin_age(minAge.getAttribute("value"));
+         return boardGame;
      }
 
 //    private static final String XML = "<items><item id=\"174430\"><thumbnail>https://cf.geekdo-images.com/</thumbnail></item></items>";
