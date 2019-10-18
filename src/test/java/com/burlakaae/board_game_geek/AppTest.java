@@ -7,6 +7,7 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
+//TODO кажется, пришло время написать юнит-тестов с использованием Mockito
 public class AppTest 
 {
     /**

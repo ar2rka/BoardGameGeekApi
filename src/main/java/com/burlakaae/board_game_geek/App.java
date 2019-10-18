@@ -10,6 +10,8 @@ import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.Properties;
 
+//TODO Обычно взаимодействие с БД выносят в отдельный класс, т.к. это отдельный слой приложения.
+// И обычно такие классы как-то характерно называют: repository, Dao или ещё как-то
 public class App 
 {
     public static void main( String[] args ) throws IOException, URISyntaxException, ParserConfigurationException, SAXException, SQLException, ClassNotFoundException {
@@ -21,6 +23,7 @@ public class App
         insertItem(bggApi.xmlParser(body));
 }
 
+    //TODO В одном методе и классе одновременно по http и в базу не ходят
     private static Integer countQuery(String table) throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         String url = "jdbc:postgresql://localhost/postgres";
@@ -34,7 +37,7 @@ public class App
         }
         Connection conn = DriverManager.getConnection(url, props);
         //в таких случаях рекомендуется использовать try with resources
-
+        //TODO Почему до сих пор не используется try with resources?
         Statement st = conn.createStatement(); 
         ResultSet rs = st.executeQuery("SELECT * FROM bgg.boardgame");
         while (rs.next())
@@ -50,6 +53,7 @@ public class App
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","");
+        //TODO try with resources
         Connection conn = DriverManager.getConnection(url, props);
         try {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO bgg.boardgame_test VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
