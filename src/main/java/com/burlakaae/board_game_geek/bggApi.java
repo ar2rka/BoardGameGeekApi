@@ -55,6 +55,7 @@ public class bggApi {
          return body;
      }
 
+     //TODO Обычно такой функционал выносят в мапперы - отдельные классы
      public BoardGame xmlParser (String body) throws ParserConfigurationException, IOException, SAXException {
          BoardGame boardGame = new BoardGame();
          DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();

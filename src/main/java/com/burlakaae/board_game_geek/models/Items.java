@@ -8,6 +8,11 @@ import lombok.Setter;
 
 import java.util.Arrays;
 
+//TODO необязательно маркать ломбоком каждое поле, getter/setter аннотации можно повесить и на класс
+//TODO для всех модельных классов принято сразу переопределять equals и hashCode. Это тоже можно сделать ломбоком
+//TODO финализировать классы в джаве из-за особенностей спринга - плохая практика. Спринг под капотом постоянно всё
+// проксирует, т.е. неявно создаёт классы-наследники от  твоих
+
 @JacksonXmlRootElement(localName = "items") public final class Items {
     @JacksonXmlProperty(localName = "termsofuse", isAttribute = true)
     @Getter @Setter private String termsofuse;
