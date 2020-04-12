@@ -16,8 +16,7 @@ import java.util.Properties;
 public class Dao {
     public static boolean insertItem(BoardGame boardGame) throws SQLException, ClassNotFoundException {
         Properties prop = new Properties();
-        try {
-            FileInputStream fileInputStream = new FileInputStream("src/main/resources/config.properties");
+        try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/config.properties")){
             prop.load(fileInputStream);
             log.info("config was read");
         } catch (FileNotFoundException e) {
@@ -38,8 +37,7 @@ public class Dao {
         props.setProperty("user", pgLogin);
         props.setProperty("password", pgPassword);
         Connection conn = DriverManager.getConnection(url, props);
-        try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO bgg.boardgame_test VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO bgg.boardgame_test VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
             ps.setString(1, boardGame.getThing_id());
             ps.setString(2, boardGame.getThing_type());
             ps.setString(3, boardGame.getThing_name());

@@ -43,13 +43,9 @@ public class bggApi {
                  .build();
          CloseableHttpClient httpclient = HttpClients.createDefault();
          HttpUriRequest httpGet = new HttpGet(uri);
-         try (
-                 CloseableHttpResponse response1 = httpclient.execute(httpGet)
-         ) {
+         try (CloseableHttpResponse response1 = httpclient.execute(httpGet)) {
              body = EntityUtils.toString(response1.getEntity());
-         } catch (
-                 IOException e
-         ) {
+         } catch (Exception e) {
              e.printStackTrace();
          }
          return body;
